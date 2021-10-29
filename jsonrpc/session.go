@@ -32,7 +32,7 @@ type Session struct {
 	cancel       chan struct{}
 }
 
-func NewSession(id int, server *Server, conn ReaderWriter) *Session {
+func newSession(id int, server *Server, conn ReaderWriter) *Session {
 	s := &Session{id: id, server: server, conn: conn}
 	s.executors = make(map[interface{}]*executor)
 	s.cancel = make(chan struct{}, 1)
@@ -60,6 +60,7 @@ func (s *Session) handle() {
 		}
 		return
 	}
+	fmt.Printf("Request: [%v] [%s]\n", req.ID, req.Method)
 	err = s.handlerRequest(req)
 	if err != nil {
 		err := s.handlerResponse(req.ID, nil, err)
@@ -265,6 +266,7 @@ func (s *Session) mustWrite(data []byte) error {
 	return nil
 }
 func (s *Session) handlerResponse(id interface{}, result interface{}, err error) error {
+	fmt.Printf("Response: [%v] res: [%v] err: [%v]\n", id, result, err)
 	resp := ResponseMessage{ID: id}
 	if err != nil {
 		if errors.Is(err, io.EOF) {
@@ -284,7 +286,9 @@ func (s *Session) handlerError(err error) {
 	if errors.Is(err, io.EOF) {
 		// conn done, close conn and remove session
 		err := s.conn.Close()
-		fmt.Println("close error: ", err)
+		if err != nil {
+			fmt.Println("close error: ", err)
+		}
 		func() {
 			s.executorLock.Lock()
 			defer s.executorLock.Unlock()

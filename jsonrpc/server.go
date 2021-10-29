@@ -50,7 +50,7 @@ func (s *Server) newSession(conn ReaderWriter) *Session {
 	defer s.sessionLock.Unlock()
 	id := s.nowId
 	s.nowId += 1
-	session := NewSession(id, s, conn)
+	session := newSession(id, s, conn)
 	s.session[id] = session
 	return session
 }
