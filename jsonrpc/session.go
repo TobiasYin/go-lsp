@@ -203,8 +203,7 @@ func (s *Session) execute(mtdInfo MethodInfo, req RequestMessage, args interface
 	}
 	go func() {
 		defer s.removeExecutor(exec)
-		resp := mtdInfo.NewResponse()
-		err := mtdInfo.Handler(ctx, args, resp)
+		resp, err := mtdInfo.Handler(ctx, args)
 		select {
 		case <-ctx.Done():
 			return

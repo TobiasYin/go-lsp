@@ -8,8 +8,7 @@ import (
 type MethodInfo struct {
 	Name        string
 	NewRequest  func() interface{}
-	NewResponse func() interface{}
-	Handler     func(ctx context.Context, req interface{}, resp interface{}) error
+	Handler     func(ctx context.Context, req interface{}) (interface{}, error)
 }
 
 type Server struct {

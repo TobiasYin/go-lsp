@@ -7,23 +7,21 @@ type cancelParams struct {
 	ID interface{} `json:"id"`
 }
 
-func cancelRequest(ctx context.Context, req interface{}, resp interface{}) error {
+func cancelRequest(ctx context.Context, req interface{}) (interface{}, error) {
 	params := req.(*cancelParams)
 	if params.ID == nil {
-		return nil
+		return nil, nil
 	}
 	session := getSession(ctx)
 	session.cancelJob(params.ID)
-	return nil
+	return nil, nil
 }
+
 func CancelRequest() MethodInfo {
 	return MethodInfo{
 		Name: "$/cancelRequest",
 		NewRequest: func() interface{} {
 			return &cancelParams{}
-		},
-		NewResponse: func() interface{} {
-			return nil
 		},
 		Handler: cancelRequest,
 	}
