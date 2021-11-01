@@ -25,7 +25,7 @@ type WorkspaceFoldersServerCapabilities struct {
     // The workspace server capabilities
     Workspace *struct {
 
-    WorkspaceFolders *interface{}  // supported, changeNotifications, 
+    WorkspaceFolders interface{}  // supported, changeNotifications, 
 }
 }
 

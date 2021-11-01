@@ -19,42 +19,42 @@ type _ServerCapabilities struct {
 
 	// Defines how text documents are synced. Is either a detailed structure defining each notification or
 	// for backwards compatibility the TextDocumentSyncKind number.
-	TextDocumentSync *interface{} // TextDocumentSyncOptions, TextDocumentSyncKind,
+	TextDocumentSync interface{} // TextDocumentSyncOptions, TextDocumentSyncKind,
 
 	// The server provides completion support.
 	CompletionProvider *CompletionOptions
 
 	// The server provides hover support.
-	HoverProvider *interface{} // bool, HoverOptions,
+	HoverProvider interface{} // bool, HoverOptions,
 
 	// The server provides signature help support.
 	SignatureHelpProvider *SignatureHelpOptions
 
 	// The server provides Goto Declaration support.
-	DeclarationProvider *interface{} // bool, DeclarationOptions, DeclarationRegistrationOptions,
+	DeclarationProvider interface{} // bool, DeclarationOptions, DeclarationRegistrationOptions,
 
 	// The server provides goto definition support.
-	DefinitionProvider *interface{} // bool, DefinitionOptions,
+	DefinitionProvider interface{} // bool, DefinitionOptions,
 
 	// The server provides Goto Type Definition support.
-	TypeDefinitionProvider *interface{} // bool, TypeDefinitionOptions, TypeDefinitionRegistrationOptions,
+	TypeDefinitionProvider interface{} // bool, TypeDefinitionOptions, TypeDefinitionRegistrationOptions,
 
 	// The server provides Goto Implementation support.
-	ImplementationProvider *interface{} // bool, ImplementationOptions, ImplementationRegistrationOptions,
+	ImplementationProvider interface{} // bool, ImplementationOptions, ImplementationRegistrationOptions,
 
 	// The server provides find references support.
-	ReferencesProvider *interface{} // bool, ReferenceOptions,
+	ReferencesProvider interface{} // bool, ReferenceOptions,
 
 	// The server provides document highlight support.
-	DocumentHighlightProvider *interface{} // bool, DocumentHighlightOptions,
+	DocumentHighlightProvider interface{} // bool, DocumentHighlightOptions,
 
 	// The server provides document symbol support.
-	DocumentSymbolProvider *interface{} // bool, DocumentSymbolOptions,
+	DocumentSymbolProvider interface{} // bool, DocumentSymbolOptions,
 
 	// The server provides code actions. CodeActionOptions may only be
 	// specified if the client states that it supports
 	// `codeActionLiteralSupport` in its initial `initialize` request.
-	CodeActionProvider *interface{} // bool, CodeActionOptions,
+	CodeActionProvider interface{} // bool, CodeActionOptions,
 
 	// The server provides code lens.
 	CodeLensProvider *CodeLensOptions
@@ -63,16 +63,16 @@ type _ServerCapabilities struct {
 	DocumentLinkProvider *DocumentLinkOptions
 
 	// The server provides color provider support.
-	ColorProvider *interface{} // bool, DocumentColorOptions, DocumentColorRegistrationOptions,
+	ColorProvider interface{} // bool, DocumentColorOptions, DocumentColorRegistrationOptions,
 
 	// The server provides workspace symbol support.
-	WorkspaceSymbolProvider *interface{} // bool, WorkspaceSymbolOptions,
+	WorkspaceSymbolProvider interface{} // bool, WorkspaceSymbolOptions,
 
 	// The server provides document formatting.
-	DocumentFormattingProvider *interface{} // bool, DocumentFormattingOptions,
+	DocumentFormattingProvider interface{} // bool, DocumentFormattingOptions,
 
 	// The server provides document range formatting.
-	DocumentRangeFormattingProvider *interface{} // bool, DocumentRangeFormattingOptions,
+	DocumentRangeFormattingProvider interface{} // bool, DocumentRangeFormattingOptions,
 
 	// The server provides document formatting on typing.
 	DocumentOnTypeFormattingProvider *DocumentOnTypeFormattingOptions
@@ -80,13 +80,13 @@ type _ServerCapabilities struct {
 	// The server provides rename support. RenameOptions may only be
 	// specified if the client states that it supports
 	// `prepareSupport` in its initial `initialize` request.
-	RenameProvider *interface{} // bool, RenameOptions,
+	RenameProvider interface{} // bool, RenameOptions,
 
 	// The server provides folding provider support.
-	FoldingRangeProvider *interface{} // bool, FoldingRangeOptions, FoldingRangeRegistrationOptions,
+	FoldingRangeProvider interface{} // bool, FoldingRangeOptions, FoldingRangeRegistrationOptions,
 
 	// The server provides selection range support.
-	SelectionRangeProvider *interface{} // bool, SelectionRangeOptions, SelectionRangeRegistrationOptions,
+	SelectionRangeProvider interface{} // bool, SelectionRangeOptions, SelectionRangeRegistrationOptions,
 
 	// The server provides execute command support.
 	ExecuteCommandProvider *ExecuteCommandOptions
@@ -94,17 +94,17 @@ type _ServerCapabilities struct {
 	// The server provides call hierarchy support.
 	//
 	// @since 3.16.0
-	CallHierarchyProvider *interface{} // bool, CallHierarchyOptions, CallHierarchyRegistrationOptions,
+	CallHierarchyProvider interface{} // bool, CallHierarchyOptions, CallHierarchyRegistrationOptions,
 
 	// The server provides linked editing range support.
 	//
 	// @since 3.16.0
-	LinkedEditingRangeProvider *interface{} // bool, LinkedEditingRangeOptions, LinkedEditingRangeRegistrationOptions,
+	LinkedEditingRangeProvider interface{} // bool, LinkedEditingRangeOptions, LinkedEditingRangeRegistrationOptions,
 
 	// The server provides semantic tokens support.
 	//
 	// @since 3.16.0
-	SemanticTokensProvider *interface{} // SemanticTokensOptions, SemanticTokensRegistrationOptions,
+	SemanticTokensProvider interface{} // SemanticTokensOptions, SemanticTokensRegistrationOptions,
 
 	// Window specific server capabilities.
 	Workspace *struct {
@@ -118,10 +118,10 @@ type _ServerCapabilities struct {
 	// The server provides moniker support.
 	//
 	// @since 3.16.0
-	MonikerProvider *interface{} // bool, MonikerOptions, MonikerRegistrationOptions,
+	MonikerProvider interface{} // bool, MonikerOptions, MonikerRegistrationOptions,
 
 	// Experimental server capabilities.
-	Experimental *interface{}
+	Experimental interface{}
 }
 
 /**
@@ -142,7 +142,7 @@ type Registration struct {
 	Method string
 
 	// Options necessary for the registration.
-	RegisterOptions *interface{}
+	RegisterOptions interface{}
 }
 
 type RegistrationParams struct {
@@ -249,7 +249,7 @@ type CompletionClientCapabilities struct {
 
 	// The client supports the following `CompletionItem` specific
 	// capabilities.
-	CompletionItem *interface{} //i, n, t, e, r, f, a, c, e, {, },  ,  , /, /,
+	CompletionItem interface{} //i, n, t, e, r, f, a, c, e, {, },  ,  , /, /,
 
 	CompletionItemKind *struct {
 
@@ -449,7 +449,7 @@ type GeneralClientCapabilities struct {
 	// anymore since the information is outdated).
 	//
 	// @since 3.17.0
-	StaleRequestSupport *interface{} // cancel, retryOnContentModified,
+	StaleRequestSupport interface{} // cancel, retryOnContentModified,
 
 	// Client capabilities specific to regular expressions.
 	//
@@ -482,7 +482,7 @@ type _ClientCapabilities struct {
 	General *GeneralClientCapabilities
 
 	// Experimental client capabilities.
-	Experimental *interface{}
+	Experimental interface{}
 }
 
 /**
@@ -552,7 +552,7 @@ type _InitializeParams struct {
 	// Information about the client
 	//
 	// @since 3.15.0
-	ClientInfo *interface{} // name, version,
+	ClientInfo interface{} // name, version,
 
 	// The locale the client is currently showing the user interface
 	// in. This must not necessarily be the locale of the operating
@@ -568,7 +568,7 @@ type _InitializeParams struct {
 	// if no folder is open.
 	//
 	// @deprecated in favour of rootUri.
-	RootPath *interface{} // string, null,
+	RootPath interface{} // string, null,
 
 	// The rootUri of the workspace. Is null if no
 	// folder is open. If both `rootPath` and `rootUri` are set
@@ -581,10 +581,10 @@ type _InitializeParams struct {
 	Capabilities ClientCapabilities
 
 	// User provided initialization options.
-	InitializationOptions *interface{}
+	InitializationOptions interface{}
 
 	// The initial trace setting. If omitted trace is disabled ('off').
-	Trace *interface{} // interface{} // 'off', interface{} // 'messages', interface{} // 'compact', interface{} // 'verbose',
+	Trace interface{} // interface{} // 'off', interface{} // 'messages', interface{} // 'compact', interface{} // 'verbose',
 }
 
 /**
@@ -608,7 +608,7 @@ type DidChangeConfigurationClientCapabilities struct {
 }
 
 type DidChangeConfigurationRegistrationOptions struct {
-	Section *interface{} // string, []string,
+	Section interface{} // string, []string,
 }
 
 /**
@@ -720,7 +720,7 @@ type TextDocumentSyncOptions struct {
 
 	// If present save notifications are sent to the server. If omitted the notification should not be
 	// sent.
-	Save *interface{} // bool, SaveOptions,
+	Save interface{} // bool, SaveOptions,
 }
 
 /**
@@ -1059,7 +1059,7 @@ type SignatureHelpClientCapabilities struct {
 
 	// The client supports the following `SignatureInformation`
 	// specific properties.
-	SignatureInformation *interface{} // documentationFormat, parameterInformation, activeParameterSupport,
+	SignatureInformation interface{} // documentationFormat, parameterInformation, activeParameterSupport,
 
 	// The client supports to send additional context information for a
 	// `textDocumentsignatureHelp` request. A client that opts into

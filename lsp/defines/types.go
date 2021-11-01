@@ -235,7 +235,7 @@ type Diagnostic struct {
     Severity *DiagnosticSeverity
 
     // The diagnostic's code, which usually appear in the user interface.
-    Code *interface{}  // int, string, 
+    Code interface{}  // int, string, 
 
     // An optional property to describe the error code.
     // Requires the code field (above) to be presentnot null.
@@ -264,7 +264,7 @@ type Diagnostic struct {
     // notification and `textDocumentcodeAction` request.
     // 
     // @since 3.16.0
-    Data *interface{}
+    Data interface{}
 }
 
 /**
@@ -592,7 +592,7 @@ type CompletionItem struct {
     Detail *string
 
     // A human-readable string that represents a doc-comment.
-    Documentation *interface{}  // string, MarkupContent, 
+    Documentation interface{}  // string, MarkupContent, 
 
     // Indicates if this item is deprecated.
     // @deprecated Use `tags` instead.
@@ -657,7 +657,7 @@ type CompletionItem struct {
     // the edit's replace range, that means it must be contained and starting at the same position.
     // 
     // @since 3.16.0 additional type `InsertReplaceEdit`
-    TextEdit *interface{}  // TextEdit, InsertReplaceEdit, 
+    TextEdit interface{}  // TextEdit, InsertReplaceEdit, 
 
     // An optional array of additional [text edits](#TextEdit) that are applied when
     // selecting this completion. Edits must not overlap (including the same insert position)
@@ -680,7 +680,7 @@ type CompletionItem struct {
 
     // A data entry field that is preserved on a completion item between a
     // [CompletionRequest](#CompletionRequest) and a [CompletionResolveRequest](#CompletionResolveRequest).
-    Data *interface{}
+    Data interface{}
 }
 
 /**
@@ -721,7 +721,7 @@ type SignatureInformation struct {
 
     // The human-readable doc-comment of this signature. Will be shown
     // in the UI but can be omitted.
-    Documentation *interface{}  // string, MarkupContent, 
+    Documentation interface{}  // string, MarkupContent, 
 
     // The parameters of this signature.
     Parameters *[]ParameterInformation
@@ -953,7 +953,7 @@ type CodeAction struct {
     // a `textDocumentcodeAction` and a `codeActionresolve` request.
     // 
     // @since 3.16.0
-    Data *interface{}
+    Data interface{}
 }
 
 /**
@@ -974,7 +974,7 @@ type CodeLens struct {
     // A data entry field that is preserved on a code lens item between
     // a [CodeLensRequest](#CodeLensRequest) and a [CodeLensResolveRequest]
     // (#CodeLensResolveRequest)
-    Data *interface{}
+    Data interface{}
 }
 
 /**
@@ -1030,7 +1030,7 @@ type DocumentLink struct {
 
     // A data entry field that is preserved on a document link between a
     // DocumentLinkRequest and a DocumentLinkResolveRequest.
-    Data *interface{}
+    Data interface{}
 }
 
 /**
@@ -1078,7 +1078,7 @@ type CallHierarchyItem struct {
 
     // A data entry field that is preserved between a call hierarchy prepare and
     // incoming calls or outgoing calls requests.
-    Data *interface{}
+    Data interface{}
 }
 
 /**
@@ -1198,7 +1198,7 @@ type TypeHierarchyItem struct {
     // supertypes or subtypes requests. It could also be used to identify the
     // type hierarchy in the server, helping improve the performance on
     // resolving supertypes and subtypes.
-    Data *interface{}
+    Data interface{}
 }
 
 /**
@@ -1450,7 +1450,7 @@ type ParameterInformation struct {
      * The human-readable doc-comment of this signature. Will be shown
      * in the UI but can be omitted.
      */
-    Documentation *interface{} // string | MarkupContent
+    Documentation interface{} // string | MarkupContent
 }
 
 /**
