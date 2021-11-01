@@ -13,9 +13,8 @@ func initialize(ctx context.Context, req interface{}, resp interface{}) error {
 	init := req.(*defines.InitializeParams)
 	res := resp.(*defines.InitializeResult)
 	fmt.Println(init)
-	t := interface{}(true)
-	res.Capabilities.CallHierarchyProvider = &t
-	res.Capabilities.TextDocumentSync = &t
+	res.Capabilities.CallHierarchyProvider = true
+	res.Capabilities.TextDocumentSync = defines.TextDocumentSyncKindFull
 	return nil
 }
 func Initialize() jsonrpc.MethodInfo {

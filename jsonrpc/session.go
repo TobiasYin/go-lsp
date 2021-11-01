@@ -242,6 +242,7 @@ func (s *Session) write(resp ResponseMessage) error {
 	if err != nil {
 		return err
 	}
+	fmt.Printf("Response: [%v] res: [%v]\n", resp.ID, string(res))
 	totalLen := len(res)
 	err = s.mustWrite([]byte(fmt.Sprintf("Content-Length: %d\r\n\r\n", totalLen)))
 	if err != nil {
@@ -266,7 +267,6 @@ func (s *Session) mustWrite(data []byte) error {
 	return nil
 }
 func (s *Session) handlerResponse(id interface{}, result interface{}, err error) error {
-	fmt.Printf("Response: [%v] res: [%v] err: [%v]\n", id, result, err)
 	resp := ResponseMessage{ID: id}
 	if err != nil {
 		if errors.Is(err, io.EOF) {
