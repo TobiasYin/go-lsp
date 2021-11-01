@@ -1,4 +1,4 @@
-package protocol
+package defines
 
 type ClientCapabilities struct {
 	_ClientCapabilities
@@ -15,48 +15,46 @@ type InitializeParams struct {
 	WorkspaceFoldersInitializeParams
 }
 
-
-
 type _ServerCapabilities struct {
 
 	// Defines how text documents are synced. Is either a detailed structure defining each notification or
 	// for backwards compatibility the TextDocumentSyncKind number.
-	TextDocumentSync *interface{}  // TextDocumentSyncOptions, TextDocumentSyncKind,
+	TextDocumentSync *interface{} // TextDocumentSyncOptions, TextDocumentSyncKind,
 
 	// The server provides completion support.
 	CompletionProvider *CompletionOptions
 
 	// The server provides hover support.
-	HoverProvider *interface{}  // bool, HoverOptions,
+	HoverProvider *interface{} // bool, HoverOptions,
 
 	// The server provides signature help support.
 	SignatureHelpProvider *SignatureHelpOptions
 
 	// The server provides Goto Declaration support.
-	DeclarationProvider *interface{}  // bool, DeclarationOptions, DeclarationRegistrationOptions,
+	DeclarationProvider *interface{} // bool, DeclarationOptions, DeclarationRegistrationOptions,
 
 	// The server provides goto definition support.
-	DefinitionProvider *interface{}  // bool, DefinitionOptions,
+	DefinitionProvider *interface{} // bool, DefinitionOptions,
 
 	// The server provides Goto Type Definition support.
-	TypeDefinitionProvider *interface{}  // bool, TypeDefinitionOptions, TypeDefinitionRegistrationOptions,
+	TypeDefinitionProvider *interface{} // bool, TypeDefinitionOptions, TypeDefinitionRegistrationOptions,
 
 	// The server provides Goto Implementation support.
-	ImplementationProvider *interface{}  // bool, ImplementationOptions, ImplementationRegistrationOptions,
+	ImplementationProvider *interface{} // bool, ImplementationOptions, ImplementationRegistrationOptions,
 
 	// The server provides find references support.
-	ReferencesProvider *interface{}  // bool, ReferenceOptions,
+	ReferencesProvider *interface{} // bool, ReferenceOptions,
 
 	// The server provides document highlight support.
-	DocumentHighlightProvider *interface{}  // bool, DocumentHighlightOptions,
+	DocumentHighlightProvider *interface{} // bool, DocumentHighlightOptions,
 
 	// The server provides document symbol support.
-	DocumentSymbolProvider *interface{}  // bool, DocumentSymbolOptions,
+	DocumentSymbolProvider *interface{} // bool, DocumentSymbolOptions,
 
 	// The server provides code actions. CodeActionOptions may only be
 	// specified if the client states that it supports
 	// `codeActionLiteralSupport` in its initial `initialize` request.
-	CodeActionProvider *interface{}  // bool, CodeActionOptions,
+	CodeActionProvider *interface{} // bool, CodeActionOptions,
 
 	// The server provides code lens.
 	CodeLensProvider *CodeLensOptions
@@ -65,16 +63,16 @@ type _ServerCapabilities struct {
 	DocumentLinkProvider *DocumentLinkOptions
 
 	// The server provides color provider support.
-	ColorProvider *interface{}  // bool, DocumentColorOptions, DocumentColorRegistrationOptions,
+	ColorProvider *interface{} // bool, DocumentColorOptions, DocumentColorRegistrationOptions,
 
 	// The server provides workspace symbol support.
-	WorkspaceSymbolProvider *interface{}  // bool, WorkspaceSymbolOptions,
+	WorkspaceSymbolProvider *interface{} // bool, WorkspaceSymbolOptions,
 
 	// The server provides document formatting.
-	DocumentFormattingProvider *interface{}  // bool, DocumentFormattingOptions,
+	DocumentFormattingProvider *interface{} // bool, DocumentFormattingOptions,
 
 	// The server provides document range formatting.
-	DocumentRangeFormattingProvider *interface{}  // bool, DocumentRangeFormattingOptions,
+	DocumentRangeFormattingProvider *interface{} // bool, DocumentRangeFormattingOptions,
 
 	// The server provides document formatting on typing.
 	DocumentOnTypeFormattingProvider *DocumentOnTypeFormattingOptions
@@ -82,13 +80,13 @@ type _ServerCapabilities struct {
 	// The server provides rename support. RenameOptions may only be
 	// specified if the client states that it supports
 	// `prepareSupport` in its initial `initialize` request.
-	RenameProvider *interface{}  // bool, RenameOptions,
+	RenameProvider *interface{} // bool, RenameOptions,
 
 	// The server provides folding provider support.
-	FoldingRangeProvider *interface{}  // bool, FoldingRangeOptions, FoldingRangeRegistrationOptions,
+	FoldingRangeProvider *interface{} // bool, FoldingRangeOptions, FoldingRangeRegistrationOptions,
 
 	// The server provides selection range support.
-	SelectionRangeProvider *interface{}  // bool, SelectionRangeOptions, SelectionRangeRegistrationOptions,
+	SelectionRangeProvider *interface{} // bool, SelectionRangeOptions, SelectionRangeRegistrationOptions,
 
 	// The server provides execute command support.
 	ExecuteCommandProvider *ExecuteCommandOptions
@@ -96,17 +94,17 @@ type _ServerCapabilities struct {
 	// The server provides call hierarchy support.
 	//
 	// @since 3.16.0
-	CallHierarchyProvider *interface{}  // bool, CallHierarchyOptions, CallHierarchyRegistrationOptions,
+	CallHierarchyProvider *interface{} // bool, CallHierarchyOptions, CallHierarchyRegistrationOptions,
 
 	// The server provides linked editing range support.
 	//
 	// @since 3.16.0
-	LinkedEditingRangeProvider *interface{}  // bool, LinkedEditingRangeOptions, LinkedEditingRangeRegistrationOptions,
+	LinkedEditingRangeProvider *interface{} // bool, LinkedEditingRangeOptions, LinkedEditingRangeRegistrationOptions,
 
 	// The server provides semantic tokens support.
 	//
 	// @since 3.16.0
-	SemanticTokensProvider *interface{}  // SemanticTokensOptions, SemanticTokensRegistrationOptions,
+	SemanticTokensProvider *interface{} // SemanticTokensOptions, SemanticTokensRegistrationOptions,
 
 	// Window specific server capabilities.
 	Workspace *struct {
@@ -120,13 +118,11 @@ type _ServerCapabilities struct {
 	// The server provides moniker support.
 	//
 	// @since 3.16.0
-	MonikerProvider *interface{}  // bool, MonikerOptions, MonikerRegistrationOptions,
+	MonikerProvider *interface{} // bool, MonikerOptions, MonikerRegistrationOptions,
 
 	// Experimental server capabilities.
 	Experimental *interface{}
 }
-
-
 
 /**
  * @deprecated Use ApplyWorkspaceEditResult instead.
@@ -166,7 +162,7 @@ type Unregistration struct {
 	Method string
 }
 
-type ProgressToken interface {} // number | string
+type ProgressToken interface{} // number | string
 
 type WorkDoneProgressParams struct {
 
@@ -253,7 +249,7 @@ type CompletionClientCapabilities struct {
 
 	// The client supports the following `CompletionItem` specific
 	// capabilities.
-	CompletionItem *interface{}  //i, n, t, e, r, f, a, c, e, {, },  ,  , /, /,
+	CompletionItem *interface{} //i, n, t, e, r, f, a, c, e, {, },  ,  , /, /,
 
 	CompletionItemKind *struct {
 
@@ -279,8 +275,6 @@ type CompletionClientCapabilities struct {
 	// `textDocumentcompletion` request.
 	ContextSupport *bool
 }
-
-
 
 /**
  * Text document specific client capabilities.
@@ -526,6 +520,26 @@ type WorkDoneProgressOptions struct {
 }
 
 /**
+ * The result returned from an initialize request.
+ */
+type InitializeResult struct {
+
+	// The capabilities the language server provides.
+	Capabilities ServerCapabilities
+
+	// Information about the server.
+	//
+	// @since 3.15.0
+	ServerInfo *struct {
+		Name    string
+		Version *string
+	} // name, version,
+
+	// Custom initialization results.
+	Custom interface{}
+}
+
+/**
  * The initialize parameters
  */
 type _InitializeParams struct {
@@ -742,8 +756,6 @@ type DidChangeTextDocumentParams struct {
 	ContentChanges []TextDocumentContentChangeEvent
 }
 
-
-
 /**
  * An event describing a change to a text document. If range and rangeLength are omitted
  * the new text is considered to be the full content of the document.
@@ -761,8 +773,6 @@ type TextDocumentContentChangeEvent struct {
 	// The new text for the provided range.
 	Text interface{} // string, {"text": string}
 }
-
-
 
 /**
  * Describe options to be used when registered for text document change events.

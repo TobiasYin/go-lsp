@@ -1,4 +1,4 @@
-package protocol
+package defines
 
 type WorkspaceDocumentDiagnosticReport interface{} // WorkspaceFullDocumentDiagnosticReport | WorkspaceUnchangedDocumentDiagnosticReport;
 

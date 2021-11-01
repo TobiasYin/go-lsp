@@ -1,4 +1,4 @@
-package protocol
+package defines
 
 /**
  * A tagging type for string properties that are actually document URIs.

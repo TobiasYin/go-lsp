@@ -1,4 +1,4 @@
-package protocol
+package defines
 
 /**
  * @since 3.16.0
