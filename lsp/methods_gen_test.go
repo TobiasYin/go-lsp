@@ -15,17 +15,6 @@ type typ_ struct {
 	typ     string
 }
 
-func isNil(i interface{}) bool {
-	if i == nil {
-		return true
-	}
-	v := reflect.ValueOf(i)
-	if v.Kind() == reflect.Ptr && v.IsNil() {
-		return true
-	}
-	return false
-}
-
 func removeNamePrefix(s string) string {
 	n := strings.Split(s, ".")
 	name := n[len(n)-1]
@@ -82,7 +71,7 @@ func firstUp(s string) string {
 	return strings.ToUpper(s[0:1]) + s[1:]
 }
 
-func generateOne(name, args, result, error, code string, withBuiltin bool) (string, string, string) {
+func generateOne(name, regName, args, result, error, code string, withBuiltin bool) (string, string, string) {
 	name = firstUp(name)
 	nameFirstLow := firstLow(name)
 	structField := fmt.Sprintf(structItemTemp, name, args, result, error)
@@ -93,19 +82,19 @@ func generateOne(name, args, result, error, code string, withBuiltin bool) (stri
 	}
 	rpcHandler := fmt.Sprintf(jsonrpcHandlerTemp, nameFirstLow, args, name, name, code, defaultOpt)
 	retArgs := "&" + args + "{}"
-	if args == "interface{}"{
+	if args == "interface{}" {
 		retArgs = "nil"
 	}
 	defaultRet := ""
-	if !withBuiltin{
+	if !withBuiltin {
 		defaultRet = fmt.Sprintf(methodInfoDefaultTemp, name)
 	}
-	methodsInfo := fmt.Sprintf(methodsInfoTemp, nameFirstLow, defaultRet, nameFirstLow, retArgs, nameFirstLow)
+	methodsInfo := fmt.Sprintf(methodsInfoTemp, nameFirstLow, defaultRet, regName, retArgs, nameFirstLow)
 	getInfo := fmt.Sprintf(getInfoItemTemp, nameFirstLow)
 	return structField, fmt.Sprintf("%s\n%s\n%s", method, rpcHandler, methodsInfo), getInfo
 }
 
-func generateOneNoResp(name, args, error, code string, withBuiltin bool) (string, string, string) {
+func generateOneNoResp(name, regName, args, error, code string, withBuiltin bool) (string, string, string) {
 	name = firstUp(name)
 	nameFirstLow := firstLow(name)
 	structField := fmt.Sprintf(noRespStructItemTemp, name, args, error)
@@ -116,14 +105,14 @@ func generateOneNoResp(name, args, error, code string, withBuiltin bool) (string
 	}
 	rpcHandler := fmt.Sprintf(noRespJsonrpcHandlerTemp, nameFirstLow, args, name, name, code, defaultOpt)
 	retArgs := "&" + args + "{}"
-	if args == "interface{}"{
+	if args == "interface{}" {
 		retArgs = "nil"
 	}
 	defaultRet := ""
-	if !withBuiltin{
+	if !withBuiltin {
 		defaultRet = fmt.Sprintf(methodInfoDefaultTemp, name)
 	}
-	methodsInfo := fmt.Sprintf(methodsInfoTemp, nameFirstLow, defaultRet, nameFirstLow, retArgs, nameFirstLow)
+	methodsInfo := fmt.Sprintf(methodsInfoTemp, nameFirstLow, defaultRet, regName, retArgs, nameFirstLow)
 	getInfo := fmt.Sprintf(getInfoItemTemp, nameFirstLow)
 	return structField, fmt.Sprintf("%s\n%s\n%s", method, rpcHandler, methodsInfo), getInfo
 }
@@ -142,6 +131,10 @@ func generate(items []method) string {
 	codeBlock3 := []string{}
 	for _, item := range items {
 		name := item.Name
+		regName := item.RegisterName
+		if regName == "" {
+			regName = firstLow(name)
+		}
 		builtin := item.WithBuiltin
 		args := getType(item.Args)
 		result := getType(item.Result)
@@ -166,14 +159,14 @@ func generate(items []method) string {
 				panic(fmt.Sprintf("not supported %v", item))
 			}
 			if len(args) == 1 {
-				a, b, c := generateOneNoResp(name, args[0].typ, errorT, code, builtin)
+				a, b, c := generateOneNoResp(name, regName, args[0].typ, errorT, code, builtin)
 				codeBlock1 = append(codeBlock1, a)
 				codeBlock2 = append(codeBlock2, b)
 				codeBlock3 = append(codeBlock3, c)
 			} else {
 				for _, n := range args {
 					newName := name + "With" + n.typName
-					a, b, c := generateOneNoResp(newName, n.typ, errorT, code, builtin)
+					a, b, c := generateOneNoResp(newName, regName, n.typ, errorT, code, builtin)
 					codeBlock1 = append(codeBlock1, a)
 					codeBlock2 = append(codeBlock2, b)
 					codeBlock3 = append(codeBlock3, c)
@@ -186,14 +179,14 @@ func generate(items []method) string {
 				panic(fmt.Sprintf("not supported %v", item))
 			}
 			if len(args) == 1 {
-				a, b, c := generateOne(name, args[0].typ, result[0].typ, errorT, code, builtin)
+				a, b, c := generateOne(name, regName, args[0].typ, result[0].typ, errorT, code, builtin)
 				codeBlock1 = append(codeBlock1, a)
 				codeBlock2 = append(codeBlock2, b)
 				codeBlock3 = append(codeBlock3, c)
 			} else {
 				for _, n := range args {
 					newName := name + "With" + n.typName
-					a, b, c := generateOne(newName, n.typ, result[0].typ, errorT, code, builtin)
+					a, b, c := generateOne(newName, regName, n.typ, result[0].typ, errorT, code, builtin)
 					codeBlock1 = append(codeBlock1, a)
 					codeBlock2 = append(codeBlock2, b)
 					codeBlock3 = append(codeBlock3, c)
@@ -208,7 +201,7 @@ func generate(items []method) string {
 			if len(args) == 1 {
 				for _, n := range result {
 					newName := name + "With" + n.typName
-					a, b, c := generateOne(newName, args[0].typ, n.typ, errorT, code, builtin)
+					a, b, c := generateOne(newName, regName, args[0].typ, n.typ, errorT, code, builtin)
 					codeBlock1 = append(codeBlock1, a)
 					codeBlock2 = append(codeBlock2, b)
 					codeBlock3 = append(codeBlock3, c)
@@ -217,7 +210,7 @@ func generate(items []method) string {
 				for _, r := range result {
 					for _, n := range args {
 						newName := name + "With" + n.typName + "With" + r.typName
-						a, b, c := generateOne(newName, r.typ, n.typ, errorT, code, builtin)
+						a, b, c := generateOne(newName, regName, r.typ, n.typ, errorT, code, builtin)
 						codeBlock1 = append(codeBlock1, a)
 						codeBlock2 = append(codeBlock2, b)
 						codeBlock3 = append(codeBlock3, c)
