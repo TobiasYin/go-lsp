@@ -1,7 +1,5 @@
 package defines
 
-
-
 /**
  * Client capabilities specific to inline values.
  *
@@ -9,8 +7,8 @@ package defines
  */
 type InlineValuesClientCapabilities struct {
 
-    // Whether implementation supports dynamic registration for inline value providers.
-    DynamicRegistration *bool
+	// Whether implementation supports dynamic registration for inline value providers.
+	DynamicRegistration *bool `json:"dynamicRegistration,omitempty"`
 }
 
 /**
@@ -20,14 +18,14 @@ type InlineValuesClientCapabilities struct {
  */
 type InlineValuesWorkspaceClientCapabilities struct {
 
-    // Whether the client implementation supports a refresh request sent from the
-    // server to the client.
-    // 
-    // Note that this event is global and will force the client to refresh all
-    // inline values currently shown. It should be used with absolute care and is
-    // useful for situation where a server for example detect a project wide
-    // change that requires such a calculation.
-    RefreshSupport *bool
+	// Whether the client implementation supports a refresh request sent from the
+	// server to the client.
+	//
+	// Note that this event is global and will force the client to refresh all
+	// inline values currently shown. It should be used with absolute care and is
+	// useful for situation where a server for example detect a project wide
+	// change that requires such a calculation.
+	RefreshSupport *bool `json:"refreshSupport,omitempty"`
 }
 
 /**
@@ -36,8 +34,7 @@ type InlineValuesWorkspaceClientCapabilities struct {
  * @since 3.17.0 - proposed state
  */
 type InlineValuesOptions struct {
-    WorkDoneProgressOptions
-
+	WorkDoneProgressOptions
 }
 
 /**
@@ -46,10 +43,9 @@ type InlineValuesOptions struct {
  * @since 3.17.0 - proposed state
  */
 type InlineValuesRegistrationOptions struct {
-    InlineValuesOptions
-    TextDocumentRegistrationOptions
-    StaticRegistrationOptions
-
+	InlineValuesOptions
+	TextDocumentRegistrationOptions
+	StaticRegistrationOptions
 }
 
 /**
@@ -58,17 +54,15 @@ type InlineValuesRegistrationOptions struct {
  * @since 3.17.0 - proposed state
  */
 type InlineValuesParams struct {
-    WorkDoneProgressParams
+	WorkDoneProgressParams
 
+	// The text document.
+	TextDocument TextDocumentIdentifier `json:"textDocument,omitempty"`
 
-    // The text document.
-    TextDocument TextDocumentIdentifier
+	// The visible document range for which inline values should be computed.
+	ViewPort Range `json:"viewPort,omitempty"`
 
-    // The visible document range for which inline values should be computed.
-    ViewPort Range
-
-    // Additional information about the context in which inline values were
-    // requested.
-    Context InlineValuesContext
+	// Additional information about the context in which inline values were
+	// requested.
+	Context InlineValuesContext `json:"context,omitempty"`
 }
-

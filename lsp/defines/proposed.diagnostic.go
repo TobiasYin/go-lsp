@@ -7,13 +7,13 @@ type WorkspaceDocumentDiagnosticReport interface{} // WorkspaceFullDocumentDiagn
  */
 type DiagnosticClientCapabilities struct {
 
-    // Whether implementation supports dynamic registration. If this is set to `true`
-    // the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-    // return value for the corresponding server capability as well.
-    DynamicRegistration *bool
+	// Whether implementation supports dynamic registration. If this is set to `true`
+	// the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	// return value for the corresponding server capability as well.
+	DynamicRegistration *bool `json:"dynamicRegistration,omitempty"`
 
-    // Whether the clients supports related documents for document diagnostic pulls.
-    RelatedDocumentSupport *bool
+	// Whether the clients supports related documents for document diagnostic pulls.
+	RelatedDocumentSupport *bool `json:"relatedDocumentSupport,omitempty"`
 }
 
 /**
@@ -22,21 +22,20 @@ type DiagnosticClientCapabilities struct {
  * @since 3.17.0 - proposed state
  */
 type DiagnosticOptions struct {
-    WorkDoneProgressOptions
+	WorkDoneProgressOptions
 
+	// An optional identifier under which the diagnostics are
+	// managed by the client.
+	Identifier *string `json:"identifier,omitempty"`
 
-    // An optional identifier under which the diagnostics are
-    // managed by the client.
-    Identifier *string
+	// Whether the language has inter file dependencies meaning that
+	// editing code in one file can result in a different diagnostic
+	// set in another file. Inter file dependencies are common for
+	// most programming languages and typically uncommon for linters.
+	InterFileDependencies bool `json:"interFileDependencies,omitempty"`
 
-    // Whether the language has inter file dependencies meaning that
-    // editing code in one file can result in a different diagnostic
-    // set in another file. Inter file dependencies are common for
-    // most programming languages and typically uncommon for linters.
-    InterFileDependencies bool
-
-    // The server provides support for workspace diagnostics as well.
-    WorkspaceDiagnostics bool
+	// The server provides support for workspace diagnostics as well.
+	WorkspaceDiagnostics bool `json:"workspaceDiagnostics,omitempty"`
 }
 
 /**
@@ -45,10 +44,9 @@ type DiagnosticOptions struct {
  * @since 3.17.0 - proposed state
  */
 type DiagnosticRegistrationOptions struct {
-    TextDocumentRegistrationOptions
-    DiagnosticOptions
-    StaticRegistrationOptions
-
+	TextDocumentRegistrationOptions
+	DiagnosticOptions
+	StaticRegistrationOptions
 }
 
 /**
@@ -57,8 +55,7 @@ type DiagnosticRegistrationOptions struct {
  * @since 3.17.0 - proposed state
  */
 type DiagnosticServerCancellationData struct {
-
-    RetriggerRequest bool
+	RetriggerRequest bool `json:"retriggerRequest,omitempty"`
 }
 
 /**
@@ -67,18 +64,17 @@ type DiagnosticServerCancellationData struct {
  * @since 3.17.0 - proposed state
  */
 type DocumentDiagnosticParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
+	// The text document.
+	TextDocument TextDocumentIdentifier `json:"textDocument,omitempty"`
 
-    // The text document.
-    TextDocument TextDocumentIdentifier
+	// The additional identifier  provided during registration.
+	Identifier *string `json:"identifier,omitempty"`
 
-    // The additional identifier  provided during registration.
-    Identifier *string
-
-    // The result id of a previous response if provided.
-    PreviousResultId *string
+	// The result id of a previous response if provided.
+	PreviousResultId *string `json:"previousResultId,omitempty"`
 }
 
 /**
@@ -87,27 +83,26 @@ type DocumentDiagnosticParams struct {
  * @since 3.17.0 - proposed state
  */
 type WorkspaceDiagnosticParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
+	// The additional identifier provided during registration.
+	Identifier *string `json:"identifier,omitempty"`
 
-    // The additional identifier provided during registration.
-    Identifier *string
-
-    // The currently known diagnostic reports with their
-    // previous result ids.
-    PreviousResultIds []PreviousResultId
+	// The currently known diagnostic reports with their
+	// previous result ids.
+	PreviousResultIds []PreviousResultId `json:"previousResultIds,omitempty"`
 }
 
 type PreviousResultId struct {
-    Uri   URI
-    Value string
+	Uri   URI    `json:"uri,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 type FullDocumentDiagnosticReport struct {
-    Kind     interface{} // DocumentDiagnosticReportKind.full
-    ResultId *string
-    Items    []interface{}
+	Kind     interface{}   `json:"kind,omitempty"` // DocumentDiagnosticReportKind.full
+	ResultId *string       `json:"resultId,omitempty"`
+	Items    []interface{} `json:"items,omitempty"`
 }
 
 /**
@@ -116,22 +111,20 @@ type FullDocumentDiagnosticReport struct {
  * @since 3.17.0 - proposed state
  */
 type WorkspaceFullDocumentDiagnosticReport struct {
-    FullDocumentDiagnosticReport
+	FullDocumentDiagnosticReport
 
+	// The URI for which diagnostic information is reported.
+	Uri DocumentUri `json:"uri,omitempty"`
 
-    // The URI for which diagnostic information is reported.
-    Uri DocumentUri
-
-    // The version number for which the diagnostics are reported.
-    // If the document is not marked as open `null` can be provided.
-    Version interface{}  // int, null, 
+	// The version number for which the diagnostics are reported.
+	// If the document is not marked as open `null` can be provided.
+	Version interface{} `json:"version,omitempty"` // int, null,
 }
 
 type UnchangedDocumentDiagnosticReport struct {
-    Kind     interface{} //DocumentDiagnosticReportKind.unChanged
-    ResultId string
+	Kind     interface{} `json:"kind,omitempty"` //DocumentDiagnosticReportKind.unChanged
+	ResultId string      `json:"resultId,omitempty"`
 }
-
 
 /**
  * An unchanged document diagnostic report for a workspace diagnostic result.
@@ -139,15 +132,14 @@ type UnchangedDocumentDiagnosticReport struct {
  * @since 3.17.0 - proposed state
  */
 type WorkspaceUnchangedDocumentDiagnosticReport struct {
-    UnchangedDocumentDiagnosticReport
+	UnchangedDocumentDiagnosticReport
 
+	// The URI for which diagnostic information is reported.
+	Uri DocumentUri `json:"uri,omitempty"`
 
-    // The URI for which diagnostic information is reported.
-    Uri DocumentUri
-
-    // The version number for which the diagnostics are reported.
-    // If the document is not marked as open `null` can be provided.
-    Version interface{}  // int, null, 
+	// The version number for which the diagnostics are reported.
+	// If the document is not marked as open `null` can be provided.
+	Version interface{} `json:"version,omitempty"` // int, null,
 }
 
 /**
@@ -156,8 +148,7 @@ type WorkspaceUnchangedDocumentDiagnosticReport struct {
  * @since 3.17.0 - proposed state
  */
 type WorkspaceDiagnosticReport struct {
-
-    Items []WorkspaceDocumentDiagnosticReport
+	Items []WorkspaceDocumentDiagnosticReport `json:"items,omitempty"`
 }
 
 /**
@@ -166,8 +157,7 @@ type WorkspaceDiagnosticReport struct {
  * @since 3.17.0 - proposed state
  */
 type WorkspaceDiagnosticReportPartialResult struct {
-
-    Items []WorkspaceDocumentDiagnosticReport
+	Items []WorkspaceDocumentDiagnosticReport `json:"items,omitempty"`
 }
 
 /**
@@ -176,15 +166,16 @@ type WorkspaceDiagnosticReportPartialResult struct {
  * @since 3.17.0 - proposed state
  */
 type DocumentDiagnosticReportKind string
+
 const (
-    /**
-     * A diagnostic report with a full
-     * set of problems.
-     */
-    DocumentDiagnosticReportKindFull DocumentDiagnosticReportKind = "full"
-    /**
-     * A report indicating that the last
-     * returned report is still accurate.
-     */
-    DocumentDiagnosticReportKindUnChanged DocumentDiagnosticReportKind = "unChanged"
+	/**
+	 * A diagnostic report with a full
+	 * set of problems.
+	 */
+	DocumentDiagnosticReportKindFull DocumentDiagnosticReportKind = "full"
+	/**
+	 * A report indicating that the last
+	 * returned report is still accurate.
+	 */
+	DocumentDiagnosticReportKindUnChanged DocumentDiagnosticReportKind = "unChanged"
 )

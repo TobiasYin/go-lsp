@@ -1,55 +1,48 @@
 package defines
 
-
-
 //---- Client capability ----
 type DocumentColorClientCapabilities struct {
 
-    // Whether implementation supports dynamic registration. If this is set to `true`
-    // the client supports the new `DocumentColorRegistrationOptions` return value
-    // for the corresponding server capability as well.
-    DynamicRegistration *bool
+	// Whether implementation supports dynamic registration. If this is set to `true`
+	// the client supports the new `DocumentColorRegistrationOptions` return value
+	// for the corresponding server capability as well.
+	DynamicRegistration *bool `json:"dynamicRegistration,omitempty"`
 }
 
 type DocumentColorOptions struct {
-    WorkDoneProgressOptions
-
+	WorkDoneProgressOptions
 }
 
 type DocumentColorRegistrationOptions struct {
-    TextDocumentRegistrationOptions
-    StaticRegistrationOptions
-    DocumentColorOptions
-
+	TextDocumentRegistrationOptions
+	StaticRegistrationOptions
+	DocumentColorOptions
 }
 
 /**
  * Parameters for a [DocumentColorRequest](#DocumentColorRequest).
  */
 type DocumentColorParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
-
-    // The text document.
-    TextDocument TextDocumentIdentifier
+	// The text document.
+	TextDocument TextDocumentIdentifier `json:"textDocument,omitempty"`
 }
 
 /**
  * Parameters for a [ColorPresentationRequest](#ColorPresentationRequest).
  */
 type ColorPresentationParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
+	// The text document.
+	TextDocument TextDocumentIdentifier `json:"textDocument,omitempty"`
 
-    // The text document.
-    TextDocument TextDocumentIdentifier
+	// The color to request presentations for.
+	Color Color `json:"color,omitempty"`
 
-    // The color to request presentations for.
-    Color Color
-
-    // The range where the color would be inserted. Serves as a context.
-    Range Range
+	// The range where the color would be inserted. Serves as a context.
+	Range Range `json:"range,omitempty"`
 }
-

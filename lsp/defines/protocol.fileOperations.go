@@ -1,7 +1,5 @@
 package defines
 
-
-
 /**
  * Options for notifications/requests for user operations on files.
  *
@@ -9,23 +7,23 @@ package defines
  */
 type FileOperationOptions struct {
 
-    // The server is interested in didCreateFiles notifications.
-    DidCreate *FileOperationRegistrationOptions
+	// The server is interested in didCreateFiles notifications.
+	DidCreate *FileOperationRegistrationOptions `json:"didCreate,omitempty"`
 
-    // The server is interested in willCreateFiles requests.
-    WillCreate *FileOperationRegistrationOptions
+	// The server is interested in willCreateFiles requests.
+	WillCreate *FileOperationRegistrationOptions `json:"willCreate,omitempty"`
 
-    // The server is interested in didRenameFiles notifications.
-    DidRename *FileOperationRegistrationOptions
+	// The server is interested in didRenameFiles notifications.
+	DidRename *FileOperationRegistrationOptions `json:"didRename,omitempty"`
 
-    // The server is interested in willRenameFiles requests.
-    WillRename *FileOperationRegistrationOptions
+	// The server is interested in willRenameFiles requests.
+	WillRename *FileOperationRegistrationOptions `json:"willRename,omitempty"`
 
-    // The server is interested in didDeleteFiles file notifications.
-    DidDelete *FileOperationRegistrationOptions
+	// The server is interested in didDeleteFiles file notifications.
+	DidDelete *FileOperationRegistrationOptions `json:"didDelete,omitempty"`
 
-    // The server is interested in willDeleteFiles file requests.
-    WillDelete *FileOperationRegistrationOptions
+	// The server is interested in willDeleteFiles file requests.
+	WillDelete *FileOperationRegistrationOptions `json:"willDelete,omitempty"`
 }
 
 /**
@@ -35,8 +33,8 @@ type FileOperationOptions struct {
  */
 type FileOperationRegistrationOptions struct {
 
-    // The actual filters.
-    Filters []FileOperationFilter
+	// The actual filters.
+	Filters []FileOperationFilter `json:"filters,omitempty"`
 }
 
 /**
@@ -46,8 +44,8 @@ type FileOperationRegistrationOptions struct {
  */
 type FileOperationPatternOptions struct {
 
-    // The pattern should be matched ignoring casing.
-    IgnoreCase *bool
+	// The pattern should be matched ignoring casing.
+	IgnoreCase *bool `json:"ignoreCase,omitempty"`
 }
 
 /**
@@ -58,22 +56,22 @@ type FileOperationPatternOptions struct {
  */
 type FileOperationPattern struct {
 
-    // The glob pattern to match. Glob patterns can have the following syntax:
-    // - `` to match one or more characters in a path segment
-    // - `?` to match on one character in a path segment
-    // - `` to match any number of path segments, including none
-    // - `{}` to group sub patterns into an OR expression. (e.g. `​.{ts,js}` matches all TypeScript and JavaScript files)
-    // - `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
-    // - `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
-    Glob string
+	// The glob pattern to match. Glob patterns can have the following syntax:
+	// - `` to match one or more characters in a path segment
+	// - `?` to match on one character in a path segment
+	// - `` to match any number of path segments, including none
+	// - `{}` to group sub patterns into an OR expression. (e.g. `​.{ts,js}` matches all TypeScript and JavaScript files)
+	// - `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
+	// - `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
+	Glob string `json:"glob,omitempty"`
 
-    // Whether to match files or folders with this pattern.
-    // 
-    // Matches both if undefined.
-    Matches *FileOperationPatternKind
+	// Whether to match files or folders with this pattern.
+	//
+	// Matches both if undefined.
+	Matches *FileOperationPatternKind `json:"matches,omitempty"`
 
-    // Additional options used during matching.
-    Options *FileOperationPatternOptions
+	// Additional options used during matching.
+	Options *FileOperationPatternOptions `json:"options,omitempty"`
 }
 
 /**
@@ -84,11 +82,11 @@ type FileOperationPattern struct {
  */
 type FileOperationFilter struct {
 
-    // A Uri like `file` or `untitled`.
-    Scheme *string
+	// A Uri like `file` or `untitled`.
+	Scheme *string `json:"scheme,omitempty"`
 
-    // The actual file operation pattern.
-    Pattern FileOperationPattern
+	// The actual file operation pattern.
+	Pattern FileOperationPattern `json:"pattern,omitempty"`
 }
 
 /**
@@ -101,26 +99,26 @@ type FileOperationFilter struct {
  */
 type FileOperationClientCapabilities struct {
 
-    // Whether the client supports dynamic registration for file requestsnotifications.
-    DynamicRegistration *bool
+	// Whether the client supports dynamic registration for file requestsnotifications.
+	DynamicRegistration *bool `json:"dynamicRegistration,omitempty"`
 
-    // The client has support for sending didCreateFiles notifications.
-    DidCreate *bool
+	// The client has support for sending didCreateFiles notifications.
+	DidCreate *bool `json:"didCreate,omitempty"`
 
-    // The client has support for willCreateFiles requests.
-    WillCreate *bool
+	// The client has support for willCreateFiles requests.
+	WillCreate *bool `json:"willCreate,omitempty"`
 
-    // The client has support for sending didRenameFiles notifications.
-    DidRename *bool
+	// The client has support for sending didRenameFiles notifications.
+	DidRename *bool `json:"didRename,omitempty"`
 
-    // The client has support for willRenameFiles requests.
-    WillRename *bool
+	// The client has support for willRenameFiles requests.
+	WillRename *bool `json:"willRename,omitempty"`
 
-    // The client has support for sending didDeleteFiles notifications.
-    DidDelete *bool
+	// The client has support for sending didDeleteFiles notifications.
+	DidDelete *bool `json:"didDelete,omitempty"`
 
-    // The client has support for willDeleteFiles requests.
-    WillDelete *bool
+	// The client has support for willDeleteFiles requests.
+	WillDelete *bool `json:"willDelete,omitempty"`
 }
 
 /**
@@ -130,8 +128,8 @@ type FileOperationClientCapabilities struct {
  */
 type CreateFilesParams struct {
 
-    // An array of all filesfolders created in this operation.
-    Files []FileCreate
+	// An array of all filesfolders created in this operation.
+	Files []FileCreate `json:"files,omitempty"`
 }
 
 /**
@@ -141,8 +139,8 @@ type CreateFilesParams struct {
  */
 type FileCreate struct {
 
-    // A file: URI for the location of the filefolder being created.
-    Uri string
+	// A file: URI for the location of the filefolder being created.
+	Uri string `json:"uri,omitempty"`
 }
 
 /**
@@ -152,9 +150,9 @@ type FileCreate struct {
  */
 type RenameFilesParams struct {
 
-    // An array of all filesfolders renamed in this operation. When a folder is renamed, only
-    // the folder will be included, and not its children.
-    Files []FileRename
+	// An array of all filesfolders renamed in this operation. When a folder is renamed, only
+	// the folder will be included, and not its children.
+	Files []FileRename `json:"files,omitempty"`
 }
 
 /**
@@ -164,11 +162,11 @@ type RenameFilesParams struct {
  */
 type FileRename struct {
 
-    // A file: URI for the original location of the filefolder being renamed.
-    OldUri string
+	// A file: URI for the original location of the filefolder being renamed.
+	OldUri string `json:"oldUri,omitempty"`
 
-    // A file: URI for the new location of the filefolder being renamed.
-    NewUri string
+	// A file: URI for the new location of the filefolder being renamed.
+	NewUri string `json:"newUri,omitempty"`
 }
 
 /**
@@ -178,8 +176,8 @@ type FileRename struct {
  */
 type DeleteFilesParams struct {
 
-    // An array of all filesfolders deleted in this operation.
-    Files []FileDelete
+	// An array of all filesfolders deleted in this operation.
+	Files []FileDelete `json:"files,omitempty"`
 }
 
 /**
@@ -189,8 +187,8 @@ type DeleteFilesParams struct {
  */
 type FileDelete struct {
 
-    // A file: URI for the location of the filefolder being deleted.
-    Uri string
+	// A file: URI for the location of the filefolder being deleted.
+	Uri string `json:"uri,omitempty"`
 }
 
 /**
@@ -200,13 +198,14 @@ type FileDelete struct {
  * @since 3.16.0
  */
 type FileOperationPatternKind string
+
 const (
-    /**
-     * The pattern matches a file only.
-     */
-    FileOperationPatternKindFile FileOperationPatternKind = "file"
-    /**
-     * The pattern matches a folder only.
-     */
-    FileOperationPatternKindFolder FileOperationPatternKind = "folder"
+	/**
+	 * The pattern matches a file only.
+	 */
+	FileOperationPatternKindFile FileOperationPatternKind = "file"
+	/**
+	 * The pattern matches a folder only.
+	 */
+	FileOperationPatternKindFolder FileOperationPatternKind = "folder"
 )

@@ -1,16 +1,14 @@
 package defines
 
-
-
 /**
  * @since 3.16.0
  */
 type CallHierarchyClientCapabilities struct {
 
-    // Whether implementation supports dynamic registration. If this is set to `true`
-    // the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-    // return value for the corresponding server capability as well.
-    DynamicRegistration *bool
+	// Whether implementation supports dynamic registration. If this is set to `true`
+	// the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	// return value for the corresponding server capability as well.
+	DynamicRegistration *bool `json:"dynamicRegistration,omitempty"`
 }
 
 /**
@@ -19,8 +17,7 @@ type CallHierarchyClientCapabilities struct {
  * @since 3.16.0
  */
 type CallHierarchyOptions struct {
-    WorkDoneProgressOptions
-
+	WorkDoneProgressOptions
 }
 
 /**
@@ -29,10 +26,9 @@ type CallHierarchyOptions struct {
  * @since 3.16.0
  */
 type CallHierarchyRegistrationOptions struct {
-    TextDocumentRegistrationOptions
-    CallHierarchyOptions
-    StaticRegistrationOptions
-
+	TextDocumentRegistrationOptions
+	CallHierarchyOptions
+	StaticRegistrationOptions
 }
 
 /**
@@ -41,9 +37,8 @@ type CallHierarchyRegistrationOptions struct {
  * @since 3.16.0
  */
 type CallHierarchyPrepareParams struct {
-    TextDocumentPositionParams
-    WorkDoneProgressParams
-
+	TextDocumentPositionParams
+	WorkDoneProgressParams
 }
 
 /**
@@ -52,11 +47,10 @@ type CallHierarchyPrepareParams struct {
  * @since 3.16.0
  */
 type CallHierarchyIncomingCallsParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
-
-    Item CallHierarchyItem
+	Item CallHierarchyItem `json:"item,omitempty"`
 }
 
 /**
@@ -65,10 +59,8 @@ type CallHierarchyIncomingCallsParams struct {
  * @since 3.16.0
  */
 type CallHierarchyOutgoingCallsParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
-
-    Item CallHierarchyItem
+	Item CallHierarchyItem `json:"item,omitempty"`
 }
-

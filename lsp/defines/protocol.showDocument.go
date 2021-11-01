@@ -1,7 +1,5 @@
 package defines
 
-
-
 /**
  * Client capabilities for the show document request.
  *
@@ -9,9 +7,9 @@ package defines
  */
 type ShowDocumentClientCapabilities struct {
 
-    // The client has support for the show document
-    // request.
-    Support bool
+	// The client has support for the show document
+	// request.
+	Support bool `json:"support,omitempty"`
 }
 
 /**
@@ -21,25 +19,25 @@ type ShowDocumentClientCapabilities struct {
  */
 type ShowDocumentParams struct {
 
-    // The document uri to show.
-    Uri URI
+	// The document uri to show.
+	Uri URI `json:"uri,omitempty"`
 
-    // Indicates to show the resource in an external program.
-    // To show for example `https:code.visualstudio.com`
-    // in the default WEB browser set `external` to `true`.
-    External *bool
+	// Indicates to show the resource in an external program.
+	// To show for example `https:code.visualstudio.com`
+	// in the default WEB browser set `external` to `true`.
+	External *bool `json:"external,omitempty"`
 
-    // An optional property to indicate whether the editor
-    // showing the document should take focus or not.
-    // Clients might ignore this property if an external
-    // program in started.
-    TakeFocus *bool
+	// An optional property to indicate whether the editor
+	// showing the document should take focus or not.
+	// Clients might ignore this property if an external
+	// program in started.
+	TakeFocus *bool `json:"takeFocus,omitempty"`
 
-    // An optional selection range if the document is a text
-    // document. Clients might ignore the property if an
-    // external program is started or the file is not a text
-    // file.
-    Selection *Range
+	// An optional selection range if the document is a text
+	// document. Clients might ignore the property if an
+	// external program is started or the file is not a text
+	// file.
+	Selection *Range `json:"selection,omitempty"`
 }
 
 /**
@@ -49,7 +47,6 @@ type ShowDocumentParams struct {
  */
 type ShowDocumentResult struct {
 
-    // A boolean indicating if the show was successful.
-    Success bool
+	// A boolean indicating if the show was successful.
+	Success bool `json:"success,omitempty"`
 }
-

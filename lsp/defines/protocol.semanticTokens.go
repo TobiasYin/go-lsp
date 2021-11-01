@@ -4,14 +4,14 @@ package defines
  * @since 3.16.0
  */
 type SemanticTokensPartialResult struct {
-	Data []uint
+	Data []uint `json:"data,omitempty"`
 }
 
 /**
  * @since 3.16.0
  */
 type SemanticTokensDeltaPartialResult struct {
-	Edits []SemanticTokensEdit
+	Edits []SemanticTokensEdit `json:"edits,omitempty"`
 }
 
 /**
@@ -22,7 +22,7 @@ type SemanticTokensClientCapabilities struct {
 	// Whether implementation supports dynamic registration. If this is set to `true`
 	// the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool
+	DynamicRegistration *bool `json:"dynamicRegistration,omitempty"`
 
 	// Which requests the client supports and might send to the server
 	// depending on the server's capability. Please note that clients might not
@@ -32,22 +32,22 @@ type SemanticTokensClientCapabilities struct {
 	// `request.range` are both set to true but the server only provides a
 	// range provider the client might not render a minimap correctly or might
 	// even decide to not show any semantic tokens at all.
-	Requests interface{} // range, full,
+	Requests interface{} `json:"requests,omitempty"` // range, full,
 
 	// The token types that the client supports.
-	TokenTypes []string
+	TokenTypes []string `json:"tokenTypes,omitempty"`
 
 	// The token modifiers that the client supports.
-	TokenModifiers []string
+	TokenModifiers []string `json:"tokenModifiers,omitempty"`
 
 	// The token formats the clients supports.
-	Formats []TokenFormat
+	Formats []TokenFormat `json:"formats,omitempty"`
 
 	// Whether the client supports tokens that can overlap each other.
-	OverlappingTokenSupport *bool
+	OverlappingTokenSupport *bool `json:"overlappingTokenSupport,omitempty"`
 
 	// Whether the client supports tokens that can span multiple lines.
-	MultilineTokenSupport *bool
+	MultilineTokenSupport *bool `json:"multilineTokenSupport,omitempty"`
 
 	// Whether the client allows the server to actively cancel a
 	// semantic token request, e.g. supports returning
@@ -55,7 +55,7 @@ type SemanticTokensClientCapabilities struct {
 	// needs to retrigger the request.
 	//
 	// @since 3.17.0
-	ServerCancelSupport *bool
+	ServerCancelSupport *bool `json:"serverCancelSupport,omitempty"`
 }
 
 /**
@@ -65,14 +65,14 @@ type SemanticTokensOptions struct {
 	WorkDoneProgressOptions
 
 	// The legend used by the server
-	Legend SemanticTokensLegend
+	Legend SemanticTokensLegend `json:"legend,omitempty"`
 
 	// Server supports providing semantic tokens for a specific range
 	// of a document.
-	Range *bool
+	Range *bool `json:"range,omitempty"`
 
 	// Server supports providing semantic tokens for a full document.
-	Full *bool
+	Full *bool `json:"full,omitempty"`
 }
 
 /**
@@ -92,7 +92,7 @@ type SemanticTokensParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier
+	TextDocument TextDocumentIdentifier `json:"textDocument,omitempty"`
 }
 
 /**
@@ -103,11 +103,11 @@ type SemanticTokensDeltaParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier
+	TextDocument TextDocumentIdentifier `json:"textDocument,omitempty"`
 
 	// The result id of a previous response. The result Id can either point to a full response
 	// or a delta response depending on what was received last.
-	PreviousResultId string
+	PreviousResultId string `json:"previousResultId,omitempty"`
 }
 
 /**
@@ -118,10 +118,10 @@ type SemanticTokensRangeParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier
+	TextDocument TextDocumentIdentifier `json:"textDocument,omitempty"`
 
 	// The range the semantic tokens are requested for.
-	Range Range
+	Range Range `json:"range,omitempty"`
 }
 
 /**
@@ -136,7 +136,7 @@ type SemanticTokensWorkspaceClientCapabilities struct {
 	// semantic tokens currently shown. It should be used with absolute care
 	// and is useful for situation where a server for example detects a project
 	// wide change that requires such a calculation.
-	RefreshSupport *bool
+	RefreshSupport *bool `json:"refreshSupport,omitempty"`
 }
 
 //------- 'textDocument/semanticTokens' -----

@@ -1,16 +1,14 @@
 package defines
 
-
-
 /**
  * @since 3.17.0 - proposed state
  */
 type TypeHierarchyClientCapabilities struct {
 
-    // Whether implementation supports dynamic registration. If this is set to `true`
-    // the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
-    // return value for the corresponding server capability as well.
-    DynamicRegistration *bool
+	// Whether implementation supports dynamic registration. If this is set to `true`
+	// the client supports the new `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
+	// return value for the corresponding server capability as well.
+	DynamicRegistration *bool `json:"dynamicRegistration,omitempty"`
 }
 
 /**
@@ -19,8 +17,7 @@ type TypeHierarchyClientCapabilities struct {
  * @since 3.17.0 - proposed state
  */
 type TypeHierarchyOptions struct {
-    WorkDoneProgressOptions
-
+	WorkDoneProgressOptions
 }
 
 /**
@@ -29,10 +26,9 @@ type TypeHierarchyOptions struct {
  * @since 3.17.0 - proposed state
  */
 type TypeHierarchyRegistrationOptions struct {
-    TextDocumentRegistrationOptions
-    TypeHierarchyOptions
-    StaticRegistrationOptions
-
+	TextDocumentRegistrationOptions
+	TypeHierarchyOptions
+	StaticRegistrationOptions
 }
 
 /**
@@ -41,9 +37,8 @@ type TypeHierarchyRegistrationOptions struct {
  * @since 3.17.0 - proposed state
  */
 type TypeHierarchyPrepareParams struct {
-    TextDocumentPositionParams
-    WorkDoneProgressParams
-
+	TextDocumentPositionParams
+	WorkDoneProgressParams
 }
 
 /**
@@ -52,11 +47,10 @@ type TypeHierarchyPrepareParams struct {
  * @since 3.17.0 - proposed state
  */
 type TypeHierarchySupertypesParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
-
-    Item TypeHierarchyItem
+	Item TypeHierarchyItem `json:"item,omitempty"`
 }
 
 /**
@@ -65,10 +59,8 @@ type TypeHierarchySupertypesParams struct {
  * @since 3.17.0 - proposed state
  */
 type TypeHierarchySubtypesParams struct {
-    WorkDoneProgressParams
-    PartialResultParams
+	WorkDoneProgressParams
+	PartialResultParams
 
-
-    Item TypeHierarchyItem
+	Item TypeHierarchyItem `json:"item,omitempty"`
 }
-
