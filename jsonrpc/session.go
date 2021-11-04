@@ -60,7 +60,7 @@ func (s *Session) handle() {
 		}
 		return
 	}
-	fmt.Printf("Request: [%v] [%s]\n", req.ID, req.Method)
+	fmt.Printf("Request: [%v] [%s], content: [%v]\n", req.ID, req.Method, string(req.Params))
 	err = s.handlerRequest(req)
 	if err != nil {
 		err := s.handlerResponse(req.ID, nil, err)

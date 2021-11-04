@@ -228,7 +228,7 @@ var methods = []method{
 	},
 	{
 		Name: "ColorPresentation",
-		RegisterName: "textDocument/documentColor",
+		RegisterName: "textDocument/colorPresentation",
 		Args: defines.ColorPresentationParams{},
 		Result: []defines.ColorPresentation{},
 		ProgressToken: []defines.ColorPresentation{},

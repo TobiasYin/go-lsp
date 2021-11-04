@@ -3,6 +3,8 @@ package lsp
 import "github.com/TobiasYin/go-lsp/lsp/defines"
 
 type Options struct {
+	Network                          string
+	Address                          string
 	TextDocumentSync                 defines.TextDocumentSyncKind
 	CompletionProvider               *defines.CompletionOptions
 	HoverProvider                    *defines.HoverOptions

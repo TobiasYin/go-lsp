@@ -1138,7 +1138,7 @@ func (m *Methods) colorPresentationMethodInfo() *jsonrpc.MethodInfo {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "textDocument/documentColor",
+		Name: "textDocument/colorPresentation",
 		NewRequest: func() interface{} {
 			return &defines.ColorPresentationParams{}
 		},

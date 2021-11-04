@@ -13,9 +13,9 @@ type Server struct {
 	rpcServer *jsonrpc.Server
 }
 
-func NewServer(opt Options) *Server {
+func NewServer(opt *Options) *Server {
 	s := &Server{}
-	s.Opt = opt
+	s.Opt = *opt
 	s.rpcServer = jsonrpc.NewServer()
 	return s
 }
@@ -31,8 +31,15 @@ func (s *Server) Run() {
 	s.run()
 }
 func (s *Server) run() {
-	addr := "127.0.0.1:7999"
-	listener, err := net.Listen("tcp", addr)
+	addr := "127.0.0.1:7998"
+	if s.Opt.Address != ""{
+		addr = s.Opt.Address
+	}
+	netType := "tcp"
+	if s.Opt.Network != "" {
+		netType = s.Opt.Network
+    }
+	listener, err := net.Listen(netType, addr)
 	if err != nil {
 		panic(err)
 	}

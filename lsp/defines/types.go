@@ -58,7 +58,7 @@ type DeclarationLink LocationLink
 type Position struct {
 
 	// Line position in a document (zero-based).
-	Line uint `json:"line,omitempty"`
+	Line uint `json:"line"`
 
 	// Character offset on a line in a document (zero-based). Assuming that the line is
 	// represented as a string, the `character` value represents the gap between the
@@ -66,7 +66,7 @@ type Position struct {
 	//
 	// If the character value is greater than the line length it defaults back to the
 	// line length.
-	Character uint `json:"character,omitempty"`
+	Character uint `json:"character"`
 }
 
 /**
@@ -132,16 +132,16 @@ type LocationLink struct {
 type Color struct {
 
 	// The red component of this color in the range [0-1].
-	Red int `json:"red,omitempty"`
+	Red float32 `json:"red,omitempty"`
 
 	// The green component of this color in the range [0-1].
-	Green int `json:"green,omitempty"`
+	Green float32 `json:"green,omitempty"`
 
 	// The blue component of this color in the range [0-1].
-	Blue int `json:"blue,omitempty"`
+	Blue float32 `json:"blue,omitempty"`
 
 	// The alpha component of this color in the range [0-1].
-	Alpha int `json:"alpha,omitempty"`
+	Alpha float32 `json:"alpha,omitempty"`
 }
 
 /**
