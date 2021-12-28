@@ -31,32 +31,36 @@ func (s *Server) Run() {
 	s.run()
 }
 func (s *Server) run() {
-	addr := "127.0.0.1:7998"
-	if s.Opt.Address != ""{
-		addr = s.Opt.Address
-	}
-	netType := "tcp"
-	if s.Opt.Network != "" {
-		netType = s.Opt.Network
-    }
-	listener, err := net.Listen(netType, addr)
-	if err != nil {
-		panic(err)
-	}
-	for {
-		conn, err := listener.Accept()
+	addr := s.Opt.Address
+	netType := s.Opt.Network
+	if netType != "" {
+		if addr == "" {
+			addr = "127.0.0.1:7998"
+		}
+		fmt.Printf("use socket mode: net: %s, addr: %s\n", netType, addr)
+		listener, err := net.Listen(netType, addr)
 		if err != nil {
 			panic(err)
 		}
-		s.rpcServer.ConnComeIn(conn)
+		for {
+			conn, err := listener.Accept()
+			if err != nil {
+				panic(err)
+			}
+			go s.rpcServer.ConnComeIn(conn)
+		}
+	} else {
+		fmt.Println("use stdio mode.")
+		// use stdio mode
+		s.rpcServer.ConnComeIn(NewStdio())
 	}
 }
 
-func wrapErrorToRespError(err interface{}, code int) error{
-	if isNil(err){
+func wrapErrorToRespError(err interface{}, code int) error {
+	if isNil(err) {
 		return nil
 	}
-	if e, ok := err.(error); ok{
+	if e, ok := err.(error); ok {
 		return e
 	}
 	return jsonrpc.ResponseError{

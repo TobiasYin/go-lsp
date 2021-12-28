@@ -6,9 +6,9 @@ import (
 )
 
 type MethodInfo struct {
-	Name        string
-	NewRequest  func() interface{}
-	Handler     func(ctx context.Context, req interface{}) (interface{}, error)
+	Name       string
+	NewRequest func() interface{}
+	Handler    func(ctx context.Context, req interface{}) (interface{}, error)
 }
 
 type Server struct {
@@ -35,7 +35,7 @@ func (s *Server) RegisterMethod(m MethodInfo) {
 
 func (s *Server) ConnComeIn(conn ReaderWriter) {
 	session := s.newSession(conn)
-	go session.Start()
+	session.Start()
 }
 
 func (s *Server) removeSession(id int) {
