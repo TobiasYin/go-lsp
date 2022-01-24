@@ -24,5 +24,7 @@ func main() {
 			InsertText:          strPtr("Hello"),
 		}}, nil
 	})
+
+	server.Run()
 }
 ```
