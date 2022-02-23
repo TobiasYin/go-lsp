@@ -1,4 +1,5 @@
 package lsp
+
 //
 //import (
 //	"context"
@@ -19,7 +20,7 @@ package lsp
 //// initialize
 //func (s *Methods) initialize(ctx context.Context, req interface{}) (interface{}, error) {
 //	params := req.(*defines.InitializeParams)
-//	fmt.Println(params)
+//	logs.Println(params)
 //	if s.onInitialize != nil {
 //		res, err := s.onInitialize(ctx, params)
 //		e := wrapErrorToRespError(err, 0)

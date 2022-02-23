@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/TobiasYin/go-lsp/logs"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -60,7 +61,7 @@ func (s *Session) handle() {
 		}
 		return
 	}
-	fmt.Printf("Request: [%v] [%s], content: [%v]\n", req.ID, req.Method, string(req.Params))
+	logs.Printf("Request: [%v] [%s], content: [%v]\n", req.ID, req.Method, string(req.Params))
 	err = s.handlerRequest(req)
 	if err != nil {
 		err := s.handlerResponse(req.ID, nil, err)
@@ -241,7 +242,7 @@ func (s *Session) write(resp ResponseMessage) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Response: [%v] res: [%v]\n", resp.ID, string(res))
+	logs.Printf("Response: [%v] res: [%v]\n", resp.ID, string(res))
 	totalLen := len(res)
 	err = s.mustWrite([]byte(fmt.Sprintf("Content-Length: %d\r\n\r\n", totalLen)))
 	if err != nil {
@@ -286,7 +287,7 @@ func (s *Session) handlerError(err error) {
 		// conn done, close conn and remove session
 		err := s.conn.Close()
 		if err != nil {
-			fmt.Println("close error: ", err)
+			logs.Println("close error: ", err)
 		}
 		func() {
 			s.executorLock.Lock()
@@ -304,7 +305,7 @@ func (s *Session) handlerError(err error) {
 		}
 		s.server.removeSession(s.id)
 	}
-	fmt.Println("error: ", err)
+	logs.Println("error: ", err)
 	return
 }
 

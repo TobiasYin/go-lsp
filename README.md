@@ -11,12 +11,12 @@ func main() {
 		TriggerCharacters: &[]string{"."},
 	}})
 	server.OnHover(func(ctx context.Context, req *defines.HoverParams) (result *defines.Hover, err error) {
-		fmt.Println(req)
+		logs.Println(req)
 		return &defines.Hover{Contents: defines.MarkupContent{Kind: defines.MarkupKindPlainText, Value: "hello world"}}, nil
 	})
 
 	server.OnCompletion(func(ctx context.Context, req *defines.CompletionParams) (result *[]defines.CompletionItem, err error) {
-		fmt.Println(req)
+		logs.Println(req)
 		d := defines.CompletionItemKindText
 		return &[]defines.CompletionItem{defines.CompletionItem{
 			Label:               "code",

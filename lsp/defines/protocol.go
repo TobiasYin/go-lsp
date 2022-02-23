@@ -671,7 +671,7 @@ type ShowMessageRequestParams struct {
 }
 
 /**
- * The log message parameters.
+ * The logs message parameters.
  */
 type LogMessageParams struct {
 
@@ -2070,7 +2070,7 @@ const (
 	 */
 	MessageTypeInfo MessageType = 3
 	/**
-	 * A log message.
+	 * A logs message.
 	 */
 	MessageTypeLog MessageType = 4
 )
@@ -2096,8 +2096,8 @@ const (
 )
 
 /**
- * The log message notification is sent from the server to the client to ask
- * the client to log a particular message.
+ * The logs message notification is sent from the server to the client to ask
+ * the client to logs a particular message.
  */
 type LogMessageNotification string
 
@@ -2107,7 +2107,7 @@ const (
 
 /**
  * The telemetry event notification is sent from the server to the client to ask
- * the client to log telemetry data.
+ * the client to logs telemetry data.
  */
 type TelemetryEventNotification string
 

@@ -6,6 +6,7 @@ import (
 	"reflect"
 
 	"github.com/TobiasYin/go-lsp/jsonrpc"
+	"github.com/TobiasYin/go-lsp/logs"
 )
 
 type Server struct {
@@ -37,7 +38,7 @@ func (s *Server) run() {
 		if addr == "" {
 			addr = "127.0.0.1:7998"
 		}
-		fmt.Printf("use socket mode: net: %s, addr: %s\n", netType, addr)
+		logs.Printf("use socket mode: net: %s, addr: %s\n", netType, addr)
 		listener, err := net.Listen(netType, addr)
 		if err != nil {
 			panic(err)
@@ -50,7 +51,7 @@ func (s *Server) run() {
 			go s.rpcServer.ConnComeIn(conn)
 		}
 	} else {
-		fmt.Println("use stdio mode.")
+		logs.Println("use stdio mode.")
 		// use stdio mode
 		s.rpcServer.ConnComeIn(NewStdio())
 	}
