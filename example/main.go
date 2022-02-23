@@ -28,9 +28,9 @@ func main() {
 		fmt.Println(req)
 		d := defines.CompletionItemKindText
 		return &[]defines.CompletionItem{defines.CompletionItem{
-			Label:               "code",
-			Kind:                &d,
-			InsertText:          strPtr("Hello"),
+			Label:      "code",
+			Kind:       &d,
+			InsertText: strPtr("Hello"),
 		}}, nil
 	})
 
@@ -58,6 +58,7 @@ func main() {
 	})
 	server.Run()
 }
+
 func ReadFile(filename defines.DocumentUri) ([]string, error) {
 	enEscapeUrl, _ := url.QueryUnescape(string(filename))
 	data, err := ioutil.ReadFile(enEscapeUrl[6:])
@@ -91,4 +92,3 @@ func convertParagraphs(paragraph string) string {
 	}
 	return strings.Join(sentences, " ")
 }
-
