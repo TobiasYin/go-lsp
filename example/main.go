@@ -2,11 +2,15 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/url"
+	"os"
 	"strings"
 
+	"github.com/TobiasYin/go-lsp/logs"
 	"github.com/TobiasYin/go-lsp/lsp"
 	"github.com/TobiasYin/go-lsp/lsp/defines"
 )
@@ -15,17 +19,43 @@ func strPtr(str string) *string {
 	return &str
 }
 
+var logPath *string
+
+func init() {
+	var logger *log.Logger
+	defer func() {
+		logs.Init(logger)
+	}()
+	logPath = flag.String("logs", "", "logs file path")
+	if logPath == nil || *logPath == "" {
+		logger = log.New(os.Stderr, "", 0)
+		return
+	}
+	p := *logPath
+	f, err := os.Open(p)
+	if err == nil {
+		logger = log.New(f, "", 0)
+		return
+	}
+	f, err = os.Create(p)
+	if err == nil {
+		logger = log.New(f, "", 0)
+		return
+	}
+	panic(fmt.Sprintf("logs init error: %v", *logPath))
+}
+
 func main() {
 	server := lsp.NewServer(&lsp.Options{CompletionProvider: &defines.CompletionOptions{
 		TriggerCharacters: &[]string{"."},
 	}})
 	server.OnHover(func(ctx context.Context, req *defines.HoverParams) (result *defines.Hover, err error) {
-		fmt.Println(req)
+		logs.Println("hover: ", req)
 		return &defines.Hover{Contents: defines.MarkupContent{Kind: defines.MarkupKindPlainText, Value: "hello world"}}, nil
 	})
 
 	server.OnCompletion(func(ctx context.Context, req *defines.CompletionParams) (result *[]defines.CompletionItem, err error) {
-		fmt.Println(req)
+		logs.Println("completion: ", req)
 		d := defines.CompletionItemKindText
 		return &[]defines.CompletionItem{defines.CompletionItem{
 			Label:      "code",
@@ -35,7 +65,7 @@ func main() {
 	})
 
 	server.OnDocumentFormatting(func(ctx context.Context, req *defines.DocumentFormattingParams) (result *[]defines.TextEdit, err error) {
-		fmt.Println(req)
+		logs.Println("format: ", req)
 		line, err := ReadFile(req.TextDocument.Uri)
 		if err != nil {
 			return nil, err
