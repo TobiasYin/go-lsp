@@ -68,11 +68,9 @@ func (m *Methods) initialize(ctx context.Context, req interface{}) (interface{},
 	res, err := m.builtinInitialize(ctx, params)
 	e := wrapErrorToRespError(err, 1)
 	return res, e
-
 }
 
 func (m *Methods) initializeMethodInfo() *jsonrpc.MethodInfo {
-
 	return &jsonrpc.MethodInfo{
 		Name: "initialize",
 		NewRequest: func() interface{} {
@@ -97,7 +95,6 @@ func (m *Methods) initialized(ctx context.Context, req interface{}) (interface{}
 }
 
 func (m *Methods) initializedMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onInitialized == nil {
 		return nil
 	}
@@ -125,7 +122,6 @@ func (m *Methods) shutdown(ctx context.Context, req interface{}) (interface{}, e
 }
 
 func (m *Methods) shutdownMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onShutdown == nil {
 		return nil
 	}
@@ -153,7 +149,6 @@ func (m *Methods) exit(ctx context.Context, req interface{}) (interface{}, error
 }
 
 func (m *Methods) exitMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onExit == nil {
 		return nil
 	}
@@ -181,12 +176,11 @@ func (m *Methods) didChangeConfiguration(ctx context.Context, req interface{}) (
 }
 
 func (m *Methods) didChangeConfigurationMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDidChangeConfiguration == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "didChangeConfiguration",
+		Name: "workspace/didChangeConfiguration",
 		NewRequest: func() interface{} {
 			return &defines.DidChangeConfigurationParams{}
 		},
@@ -209,12 +203,11 @@ func (m *Methods) didChangeWatchedFiles(ctx context.Context, req interface{}) (i
 }
 
 func (m *Methods) didChangeWatchedFilesMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDidChangeWatchedFiles == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "didChangeWatchedFiles",
+		Name: "workspace/didChangeWatchedFiles",
 		NewRequest: func() interface{} {
 			return &defines.DidChangeWatchedFilesParams{}
 		},
@@ -237,12 +230,11 @@ func (m *Methods) didOpenTextDocument(ctx context.Context, req interface{}) (int
 }
 
 func (m *Methods) didOpenTextDocumentMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDidOpenTextDocument == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "didOpenTextDocument",
+		Name: "textDocument/didOpen",
 		NewRequest: func() interface{} {
 			return &defines.DidOpenTextDocumentParams{}
 		},
@@ -265,12 +257,11 @@ func (m *Methods) didChangeTextDocument(ctx context.Context, req interface{}) (i
 }
 
 func (m *Methods) didChangeTextDocumentMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDidChangeTextDocument == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "didChangeTextDocument",
+		Name: "textDocument/didChange",
 		NewRequest: func() interface{} {
 			return &defines.DidChangeTextDocumentParams{}
 		},
@@ -293,12 +284,11 @@ func (m *Methods) didCloseTextDocument(ctx context.Context, req interface{}) (in
 }
 
 func (m *Methods) didCloseTextDocumentMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDidCloseTextDocument == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "didCloseTextDocument",
+		Name: "textDocument/didClose",
 		NewRequest: func() interface{} {
 			return &defines.DidCloseTextDocumentParams{}
 		},
@@ -321,12 +311,11 @@ func (m *Methods) willSaveTextDocument(ctx context.Context, req interface{}) (in
 }
 
 func (m *Methods) willSaveTextDocumentMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onWillSaveTextDocument == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "willSaveTextDocument",
+		Name: "textDocument/willSave",
 		NewRequest: func() interface{} {
 			return &defines.WillSaveTextDocumentParams{}
 		},
@@ -349,12 +338,11 @@ func (m *Methods) didSaveTextDocument(ctx context.Context, req interface{}) (int
 }
 
 func (m *Methods) didSaveTextDocumentMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDidSaveTextDocument == nil {
 		return nil
 	}
 	return &jsonrpc.MethodInfo{
-		Name: "didSaveTextDocument",
+		Name: "textDocument/didSave",
 		NewRequest: func() interface{} {
 			return &defines.DidSaveTextDocumentParams{}
 		},
@@ -377,7 +365,6 @@ func (m *Methods) executeCommand(ctx context.Context, req interface{}) (interfac
 }
 
 func (m *Methods) executeCommandMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onExecuteCommand == nil {
 		return nil
 	}
@@ -405,7 +392,6 @@ func (m *Methods) hover(ctx context.Context, req interface{}) (interface{}, erro
 }
 
 func (m *Methods) hoverMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onHover == nil {
 		return nil
 	}
@@ -433,7 +419,6 @@ func (m *Methods) completion(ctx context.Context, req interface{}) (interface{},
 }
 
 func (m *Methods) completionMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onCompletion == nil {
 		return nil
 	}
@@ -461,7 +446,6 @@ func (m *Methods) completionResolve(ctx context.Context, req interface{}) (inter
 }
 
 func (m *Methods) completionResolveMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onCompletionResolve == nil {
 		return nil
 	}
@@ -489,7 +473,6 @@ func (m *Methods) signatureHelp(ctx context.Context, req interface{}) (interface
 }
 
 func (m *Methods) signatureHelpMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onSignatureHelp == nil {
 		return nil
 	}
@@ -517,7 +500,6 @@ func (m *Methods) declaration(ctx context.Context, req interface{}) (interface{}
 }
 
 func (m *Methods) declarationMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDeclaration == nil {
 		return nil
 	}
@@ -545,7 +527,6 @@ func (m *Methods) definition(ctx context.Context, req interface{}) (interface{},
 }
 
 func (m *Methods) definitionMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDefinition == nil {
 		return nil
 	}
@@ -573,7 +554,6 @@ func (m *Methods) typeDefinition(ctx context.Context, req interface{}) (interfac
 }
 
 func (m *Methods) typeDefinitionMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onTypeDefinition == nil {
 		return nil
 	}
@@ -601,7 +581,6 @@ func (m *Methods) implementation(ctx context.Context, req interface{}) (interfac
 }
 
 func (m *Methods) implementationMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onImplementation == nil {
 		return nil
 	}
@@ -629,7 +608,6 @@ func (m *Methods) references(ctx context.Context, req interface{}) (interface{},
 }
 
 func (m *Methods) referencesMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onReferences == nil {
 		return nil
 	}
@@ -657,7 +635,6 @@ func (m *Methods) documentHighlight(ctx context.Context, req interface{}) (inter
 }
 
 func (m *Methods) documentHighlightMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentHighlight == nil {
 		return nil
 	}
@@ -685,7 +662,6 @@ func (m *Methods) documentSymbolWithSliceDocumentSymbol(ctx context.Context, req
 }
 
 func (m *Methods) documentSymbolWithSliceDocumentSymbolMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentSymbolWithSliceDocumentSymbol == nil {
 		return nil
 	}
@@ -713,7 +689,6 @@ func (m *Methods) documentSymbolWithSliceSymbolInformation(ctx context.Context, 
 }
 
 func (m *Methods) documentSymbolWithSliceSymbolInformationMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentSymbolWithSliceSymbolInformation == nil {
 		return nil
 	}
@@ -741,7 +716,6 @@ func (m *Methods) workspaceSymbol(ctx context.Context, req interface{}) (interfa
 }
 
 func (m *Methods) workspaceSymbolMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onWorkspaceSymbol == nil {
 		return nil
 	}
@@ -769,7 +743,6 @@ func (m *Methods) codeActionWithSliceCommand(ctx context.Context, req interface{
 }
 
 func (m *Methods) codeActionWithSliceCommandMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onCodeActionWithSliceCommand == nil {
 		return nil
 	}
@@ -797,7 +770,6 @@ func (m *Methods) codeActionWithSliceCodeAction(ctx context.Context, req interfa
 }
 
 func (m *Methods) codeActionWithSliceCodeActionMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onCodeActionWithSliceCodeAction == nil {
 		return nil
 	}
@@ -825,7 +797,6 @@ func (m *Methods) codeActionResolve(ctx context.Context, req interface{}) (inter
 }
 
 func (m *Methods) codeActionResolveMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onCodeActionResolve == nil {
 		return nil
 	}
@@ -853,7 +824,6 @@ func (m *Methods) codeLens(ctx context.Context, req interface{}) (interface{}, e
 }
 
 func (m *Methods) codeLensMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onCodeLens == nil {
 		return nil
 	}
@@ -881,7 +851,6 @@ func (m *Methods) codeLensResolve(ctx context.Context, req interface{}) (interfa
 }
 
 func (m *Methods) codeLensResolveMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onCodeLensResolve == nil {
 		return nil
 	}
@@ -909,7 +878,6 @@ func (m *Methods) documentFormatting(ctx context.Context, req interface{}) (inte
 }
 
 func (m *Methods) documentFormattingMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentFormatting == nil {
 		return nil
 	}
@@ -937,7 +905,6 @@ func (m *Methods) documentRangeFormatting(ctx context.Context, req interface{}) 
 }
 
 func (m *Methods) documentRangeFormattingMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentRangeFormatting == nil {
 		return nil
 	}
@@ -965,7 +932,6 @@ func (m *Methods) documentOnTypeFormatting(ctx context.Context, req interface{})
 }
 
 func (m *Methods) documentOnTypeFormattingMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentOnTypeFormatting == nil {
 		return nil
 	}
@@ -993,7 +959,6 @@ func (m *Methods) renameRequest(ctx context.Context, req interface{}) (interface
 }
 
 func (m *Methods) renameRequestMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onRenameRequest == nil {
 		return nil
 	}
@@ -1021,7 +986,6 @@ func (m *Methods) prepareRename(ctx context.Context, req interface{}) (interface
 }
 
 func (m *Methods) prepareRenameMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onPrepareRename == nil {
 		return nil
 	}
@@ -1049,7 +1013,6 @@ func (m *Methods) documentLinks(ctx context.Context, req interface{}) (interface
 }
 
 func (m *Methods) documentLinksMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentLinks == nil {
 		return nil
 	}
@@ -1077,7 +1040,6 @@ func (m *Methods) documentLinkResolve(ctx context.Context, req interface{}) (int
 }
 
 func (m *Methods) documentLinkResolveMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentLinkResolve == nil {
 		return nil
 	}
@@ -1105,7 +1067,6 @@ func (m *Methods) documentColor(ctx context.Context, req interface{}) (interface
 }
 
 func (m *Methods) documentColorMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onDocumentColor == nil {
 		return nil
 	}
@@ -1133,7 +1094,6 @@ func (m *Methods) colorPresentation(ctx context.Context, req interface{}) (inter
 }
 
 func (m *Methods) colorPresentationMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onColorPresentation == nil {
 		return nil
 	}
@@ -1161,7 +1121,6 @@ func (m *Methods) foldingRanges(ctx context.Context, req interface{}) (interface
 }
 
 func (m *Methods) foldingRangesMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onFoldingRanges == nil {
 		return nil
 	}
@@ -1189,7 +1148,6 @@ func (m *Methods) selectionRanges(ctx context.Context, req interface{}) (interfa
 }
 
 func (m *Methods) selectionRangesMethodInfo() *jsonrpc.MethodInfo {
-
 	if m.onSelectionRanges == nil {
 		return nil
 	}
