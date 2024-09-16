@@ -255,6 +255,26 @@ func (s *Session) write(resp ResponseMessage) error {
 	return nil
 }
 
+func (s *Session) Notify(msg NotificationMessage) error {
+	s.writeLock.Lock()
+	defer s.writeLock.Unlock()
+	res, err := jsoniter.Marshal(msg)
+	if err != nil {
+		return err
+	}
+	logs.Printf("Notify: [%v]\n", string(res))
+	totalLen := len(res)
+	err = s.mustWrite([]byte(fmt.Sprintf("Content-Length: %d\r\n\r\n", totalLen)))
+	if err != nil {
+		return err
+	}
+	err = s.mustWrite(res)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (s *Session) mustWrite(data []byte) error {
 	t := 0
 	for t != len(data) {

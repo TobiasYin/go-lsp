@@ -1,6 +1,7 @@
 package lsp
 
 import (
+	"encoding/json"
 	"fmt"
 	"net"
 	"reflect"
@@ -79,4 +80,24 @@ func isNil(i interface{}) bool {
 		return true
 	}
 	return false
+}
+
+func (s *Server) SendNotification(method string, params json.RawMessage) error {
+	notification := jsonrpc.NotificationMessage{
+		BaseMessage: jsonrpc.BaseMessage{
+			Jsonrpc: "2.0",
+		},
+		Method: method,
+		Params: params,
+	}
+
+	sessions := s.rpcServer.GetAllSession()
+
+	for _, session := range sessions {
+		err := session.Notify(notification)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
