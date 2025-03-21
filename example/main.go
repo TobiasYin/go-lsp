@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -9,6 +10,7 @@ import (
 	"net/url"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/TobiasYin/go-lsp/logs"
 	"github.com/TobiasYin/go-lsp/lsp"
@@ -86,6 +88,16 @@ func main() {
 
 		return &res, nil
 	})
+	go func() {
+		for {
+			time.Sleep(2 * time.Second)
+			err := server.SendNotification("custom/test", json.RawMessage(`{"a":1}`))
+			if err != nil {
+				return
+			}
+		}
+	}()
+
 	server.Run()
 }
 

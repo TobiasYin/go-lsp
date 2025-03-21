@@ -53,3 +53,13 @@ func (s *Server) newSession(conn ReaderWriter) *Session {
 	s.session[id] = session
 	return session
 }
+
+func (s *Server) GetAllSession() []*Session {
+	s.sessionLock.Lock()
+	defer s.sessionLock.Unlock()
+	sessions := make([]*Session, 0, len(s.session))
+	for _, session := range s.session {
+		sessions = append(sessions, session)
+	}
+	return sessions
+}
